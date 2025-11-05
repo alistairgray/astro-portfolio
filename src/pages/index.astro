@@ -1,5 +1,215 @@
 ---
+import ChatWidget from '../components/ChatWidget.jsx';
+import '../styles.css';
 
+const introSections = [
+  {
+    title: 'Intro',
+    body: `I’m Alistair, a technical writer with nearly five years of experience turning APIs, cloud platforms, and AI-backed tools into clear, developer-friendly docs.`,
+  },
+  {
+    title: 'Why I Write',
+    body: `Writing is the best tool that I have for improving people’s days. It's the most natural skill that I have, and one that I enjoy the most.`,
+  },
+  {
+    title: 'My Rule of Thumb for Technical Writing',
+    body: `If my documentation can enable a junior dev to build something based on my docs, it means a senior engineer will breeze through, having a great time also. The way I write involves focusing on clarity, simplicity, and keeping an active and personable a tone of voice, so it just feels like it's me directly helping the developer or the person reading non-docs content. `,
+  },
+  {
+    title: 'Experience',
+    body: `
+    For the past 5 years, I have been writing technical writing specific work in API and service specific docs, instructional manuals, knowledge bases, and technical blogs. Before that I have written other forms of content, including publishing a self-help book.
+
+    Most recently, at Leanspace, I developed API references and services docs from scratch, turning them into a critical part of the company's sales offering. I also introduced and integrated advanced AI-driven RAG tools (like Amazon Q and Cody) to revolutionize how teams find and use knowledge to improve their sales and customer solutions.
+    
+    Check out my examples below to learn more.`,
+  },
+  {
+    title: 'Approach',
+    body: `
+    My approach is to act as a 'translator' between different stakeholders. I think in terms of systems, allowing me to quickly understand how complex things work, before writing content in explainable concepts for a wide audience.`,
+  }
+];
+
+const companies = [
+  { name: 'Myer',      logo: '/images/myer-logo.png',   url: 'https://www.myer.com.au' },
+  { name: 'ANZ',       logo: '/images/ANZ-Logo-2009.svg.png',    url: 'https://www.anz.com' },
+  { name: 'Paprika',   logo: '/images/paprika-logo.png',   url: 'https://thelucidplanet.co' },
+  { name: 'Neu21',     logo: '/images/neu21-logo.png',     url: 'https://neu21.com' },
+  { name: 'OzGrav',    logo: '/images/ozgrav-logo.png',    url: 'https://www.ozgrav.org' },
+  { name: 'IBM',    logo: '/images/IBM_logo.svg.png',    url: 'https://www.ibm.com' },
+  { name: 'Reece Group',    logo: '/images/REH.AX_BIG.png',    url: 'https://group.reece.com/en-us' },
+  { name: 'Leanspace', logo: '/images/leanspace.png', url: 'https://leanspace.io' },
+];
+
+const skills = [
+  { name: 'Markdown & Docs‑as‑Code', icon: '/images/icons8-markdown.png', category: 'Documentation' },
+  { name: 'OpenAPI / Swagger', icon: '/images/swagger.svg', category: 'Documentation' },
+  { name: 'Git / GitHub', icon: '/images/GitHub_(4).png', category: 'Documentation' },
+  { name: 'HTML5', icon: '/images/icons8-html-5.svg', category: 'Front‑End' },
+  { name: 'CSS3', icon: '/images/icons8-css3.svg', category: 'Front‑End' },
+  { name: 'React', icon: '/images/icons8-react-native.svg', category: 'Front‑End' },
+  { name: 'Figma', icon: '/images/icons8-figma.svg', category: 'Design' },
+  { name: 'Sketch', icon: '/images/icons8-sketch.svg', category: 'Design' },
+  { name: 'Canva', icon: '/images/icons8-canva.svg', category: 'Design' },
+  { name: 'Amazon Q', icon: '/images/amazon-q-logo.svg', category: 'AI Tools' },
+  { name: 'Cody', icon: '/images/Cody_logo.png', category: 'AI Tools' },
+];
+const skillCategories = [...new Set(skills.map((s) => s.category))];
+
+const examples = [
+  // Keeping this one for context, but ignoring the old internal slug link
+  {
+    title: 'API Docs',
+    category: 'Technical Writing',
+    year: 2025,
+    excerpt: 'The Technical Docs is under NDA, however I have created an explanation of how I write technical documentation over on my {<a href="https://github.com/alistairgray/synthetic-documentation">GitHub</a>}',
+  },
+  {
+    title: 'Easily handle contingencies with Command Sequences',
+    category: 'Technical Blogs',
+    year: 2024,
+    excerpt:
+      'How we help developers automate fallback procedures using the Leanspace API. Balances depth for engineers with clarity for space operators.',
+    url: 'https://leanspace.io/blog/easily-handle-contingencies-with-command-sequences/',
+    external: true,
+  },
+  {
+    title: 'Repairing the disconnection in recruitment',
+    category: 'Non-Technical Blogs',
+    year: 2021,
+    excerpt:
+      'Why current hiring funnels fail candidates—and how shifting to a custody‑of‑talent mindset changes everything.',
+    url: 'https://www.linkedin.com/pulse/repairing-disconnection-recruitment-alistair-gray' ,
+    external: true 
+  },
+  {
+    title: 'Finding Your Fire Within a Burning World',
+    category: 'Book',
+    year: 2020,
+    excerpt:
+      'A practical self‑help framework written during the pandemic to help readers map goals and regain momentum.',
+      url: 'https://www.amazon.com/Finding-Your-Within-Burning-World/dp/B08L4FL79T',
+      external: true
+  },
+  {
+    title: 'Lucid Planet – Episode 5',
+    category: 'Creative Writing',
+    year: 2019,
+    excerpt:
+      '“You appear to presume that one of my own people seeks my demise?”, asked Tally. Silvae paused and looked towards the markings. “I do not know for certain. Do you know anyone who may want to cause you harm?”, asked Silvae. “No. No one.” Tally responded. But internally she felt uncomfortable from that answer. Not only did she not know who she really was, now there was someone who might want her dead..',
+    url: 'https://mirror.xyz/0x7ee6236f9E888988469b671cf4B6b0D33e9540C1/VnRZcelNjIQVy704SnwtjrgXVqWO_c_eMKWCEfTt44w'  
+  }
+];
+const exampleCategories = [...new Set(examples.map((e) => e.category))];
+
+const publications = [
+  {
+    category: 'Published Books',
+    items: [
+      {
+        title: 'Finding Your Fire Within a Burning World',
+        year: 2020,
+        url: 'https://www.amazon.com.au/Finding-Your-Within-Burning-World-ebook/dp/B08L6TX3XK/',
+      },
+    ],
+  },
+  {
+    category: 'UX Design / Recruitment',
+    items: [
+      {
+        title: 'Years of Experience – What do they stand for? Do they mean anything?',
+        year: 2022,
+        url: 'https://www.linkedin.com/pulse/years-experience-what-do-stand-mean-anything-alistair-gray/',
+      },
+      {
+        title: 'Repairing the disconnection in recruitment',
+        year: 2021,
+        url: 'https://www.linkedin.com/pulse/repairing-disconnection-recruitment-alistair-gray/',
+      },
+      {
+        title: "Removing the ambiguity in LinkedIn's application process",
+        year: 2019,
+        url: 'https://www.linkedin.com/pulse/removing-ambiguity-linkedins-application-process-alistair-gray/',
+      },
+    ],
+  },
+  {
+    category: 'Future of Work',
+    items: [
+      {
+        title: 'The case for a space hub in Geelong',
+        year: 2019,
+        url: 'https://www.linkedin.com/pulse/case-space-hub-geelong-alistair-gray/',
+      },
+      {
+        title: 'Modernising our Agricultural Sector',
+        year: 2019,
+        url: 'https://www.linkedin.com/pulse/modernising-our-agricultural-sector-alistair-gray/',
+      },
+      {
+        title: 'Blockchain and Agile',
+        year: 2018,
+        url: 'https://medium.com/@alistair.g.gray/blockchain-and-agile-using-the-strengths-from-both-to-improve-the-integration-of-agile-at-scale-c8935d506c17',
+      },
+      {
+        title: 'Why Australia needs a space agency',
+        year: 2018,
+        url: 'https://medium.com/@alistair.g.gray/why-australia-needs-a-space-agency-and-how-it-could-generate-not-only-new-jobs-but-new-industries-82bcb1e36f71',
+      },
+    ],
+  },
+  {
+    category: 'Information Overload',
+    items: [
+      {
+        title: 'The fight against complexity',
+        year: 2018,
+        url: 'https://medium.com/@alistair.g.gray/the-fight-against-complexity-4d8e7a5afcb3',
+      },
+      {
+        title: 'Messaging app saturation and how it kills workplace productivity',
+        year: 2017,
+        url: 'https://medium.com/@alistair.g.gray/messaging-app-saturation-and-how-it-kills-workplace-productivity-7820d81a5702',
+      },
+      {
+        title: 'Why Email needs to die a fiery death … and be reborn',
+        year: 2017,
+        url: 'https://medium.com/@alistair.g.gray/why-email-needs-to-die-a-fiery-death-and-be-reborn-89b1e5c0d554',
+      },
+      {
+        title: 'Why we need to have a chat about Information Overload',
+        year: 2017,
+        url: 'https://medium.com/@alistair.g.gray/why-we-need-to-have-a-chat-about-information-overload-5b62d4c57958',
+      },
+    ],
+  },
+];
+
+const internalNav = [
+  { href: '#about', label: 'About' },
+  { href: '#companies', label: 'Companies' },
+  { href: '#examples', label: 'Examples' },
+  { href: '#publications', label: 'Publications' },
+  { href: '#contact', label: 'Contact' }, // Dropped '/docs/introduction' as you canned the docs site
+];
+
+const externalNav = [
+  {
+    href: 'https://www.linkedin.com/in/grayalistair',
+    label: 'LinkedIn',
+    external: true,
+  },
+  {
+    href: 'mailto:alistair.gray@hey.com',
+    label: 'Email',
+    external: false,
+  }
+];
+
+const currentYear = new Date().getFullYear();
+
+// --- 2. THE ASTRO COMPONENT ---
 ---
 
 <html lang="en">
@@ -8,9 +218,256 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<meta charset="utf-8" />
+		<link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;600&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@600&display=swap" rel="stylesheet" />
+		<title>Alistair Gray - Technical Writer</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
+
+        {/* ==========================================================
+        NAV
+        The mobile menu toggle logic is REMOVED, this is static HTML.
+        ========================================================== */}
+        <nav class="navbar" aria-label="Primary">
+            <div class="nav-links open">
+                <ul class="nav-list">
+                    {internalNav.map(({ href, label }) => (
+                        <li key={href}>
+                            <a href={href}>{label}</a>
+                        </li>
+                    ))}
+                </ul>
+
+                <ul class="nav-actions">
+                    {externalNav.map(({ href, label, download }) => (
+                        <li key={label}>
+                            <a
+                                href={href}
+                                {...(download ? { download } : {})}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                {label}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </nav>
+
+
+        <main>
+            {/* ==========================================================
+            ABOUT
+            ========================================================== */}
+            <section id="about" class="content-wrap about">
+                <h1>Alistair Gray</h1>
+                <h2>Technical Writer ∙ APIs, Cloud & AI</h2>
+                <p class="tagline">
+                    I translate complex platforms into clear, developer‑ready docs that drive adoption.
+                </p>
+                <div class="about-item">
+                    {/* The internal link is now a simple anchor to the next section */}
+                    <a href="#intro-heading" class="button" role="button">
+                        Let’s go
+                    </a>
+                    <a 
+                        href="https://github.com/alistairgray" 
+                        class="button" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                    >
+                        See the GitHub
+                    </a>
+                </div>
+            </section>
+
+            {/* ==========================================================
+            INTRO 
+            ========================================================== */}
+            <section id="intro" class="intro content-wrap" aria-labelledby="intro-heading">
+                <h2 id="intro-heading">About Me</h2>
+                <div class="intro-content">
+                    {introSections.map(({ title, body }) => (
+                        <div key={title} class="intro-content-block">
+                            <h3>{title}</h3>
+                            {/* Astro allows simple .map for line breaks like this: */}
+                            <p>
+                                {body.split('\n').map((line, i) => (
+                                    <>
+                                        {line}
+                                        {i < body.split('\n').length - 1 && <br />}
+                                    </>
+                                ))}
+                            </p>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* ==========================================================
+            COMPANIES
+            ========================================================== */}
+            <section id="companies" class="companies content-wrap" aria-labelledby="companies-heading">
+                <h2 id="companies-heading">Companies</h2>
+                <ul class="companies-list">
+                    {companies.map(({ name, logo, url }) => (
+                        <li key={name} class="companies-item">
+                            <a href={url} target="_blank" rel="noopener noreferrer">
+                                <img
+                                    src={logo}
+                                    alt={`${name} logo`}
+                                    loading="lazy"
+                                    height="60"
+                                />
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </section>
+
+            {/* ==========================================================
+            EXAMPLES
+            ========================================================== */}
+            <section id="examples" class="examples content-wrap" aria-labelledby="examples-heading">
+                <h2 id="examples-heading">Writing Samples</h2>
+                {exampleCategories.map((cat) => (
+                    <div key={cat} class="examples-group">
+                        <h3>{cat}</h3>
+                        <ul class="examples-list">
+                            {examples
+                                .filter((e) => e.category === cat)
+                                .map(({ title, excerpt, url, year }) => (
+                                    <li key={title} class="examples-card">
+                                        <article>
+                                            <header>
+                                                <h4>{title}</h4>
+                                                <span class="examples-year">{year}</span>
+                                            </header>
+                                            <p>{excerpt}</p>
+                                            {url && (
+                                                <a
+                                                    href={url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    class="examples-link"
+                                                >
+                                                    Read ⟶
+                                                </a>
+                                            )}
+                                        </article>
+                                    </li>
+                                ))}
+                        </ul>
+                    </div>
+                ))}
+            </section>
+
+            {/* ==========================================================
+            SKILLSET (Sourced from alistairgray/portfolio/portfolio-403bdce20cd26630e112b621c0131f35d0618b91/src/components/Skillset.js)
+            ========================================================== */}
+            <section id="skillset" class="skillset content-wrap" aria-labelledby="skillset-heading">
+                <h2 id="skillset-heading">Skillset</h2>
+                {skillCategories.map((cat) => (
+                    <div key={cat} class="skill-category">
+                        <h3>{cat}</h3>
+                        <ul class="skill-list">
+                            {skills
+                                .filter((s) => s.category === cat)
+                                .map(({ name, icon }) => (
+                                    <li key={name} class="skill-item">
+                                        <img
+                                            src={icon}
+                                            alt={`${name} icon`}
+                                            loading="lazy"
+                                            width="48"
+                                            height="48"
+                                        />
+                                        <span>{name}</span>
+                                    </li>
+                                ))}
+                        </ul>
+                    </div>
+                ))}
+                <small class="icon-credit">
+                    Icons supplied by{' '}
+                    <a
+                        href="https://icons8.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Icons8
+                    </a>
+                </small>
+            </section>
+
+
+            {/* ==========================================================
+            PUBLICATIONS
+            ========================================================== */}
+            <section id="publications" class="publications content-wrap" aria-labelledby="pubs-heading">
+                <h2 id="pubs-heading">Publications</h2>
+                {publications.map(({ category, items }) => (
+                    <div key={category} class="publications-section">
+                        <h3>{category}</h3>
+                        <ul class="publications-list">
+                            {items.map(({ title, year, url }) => (
+                                <li key={title} class="publications-item">
+                                    <article>
+                                        <h4 class="pub-title">{title}</h4>
+                                        <p class="pub-year">{year}</p>
+                                        <a
+                                            href={url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="pub-link"
+                                        >
+                                            Read&nbsp;⟶
+                                        </a>
+                                    </article>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                ))}
+            </section>
+
+        </main>
+
+        {/* ==========================================================
+        FOOTER / CONTACT
+        ========================================================== */}
+        <footer id="contact" class="contact-wrap">
+            <h2>Contact</h2>
+            <ul class="contact-list" aria-label="Contact links">
+                <li>
+                    <a href="mailto:alistair.g.gray@gmail.com">Email</a>
+                </li>
+                <li>
+                    <a
+                        href="https://github.com/alistairgray"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        GitHub
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href="https://www.linkedin.com/in/grayalistair/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        LinkedIn
+                    </a>
+                </li>
+            </ul>
+            <small>© {currentYear} Alistair Gray</small>
+        </footer>
+		
+		<div class="chat-prompt-box">Ask me any questions about Alistair</div>
+        <ChatWidget client:load />
+
 	</body>
 </html>

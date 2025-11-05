@@ -1,0 +1,8 @@
+[functions]
+  node_bundler = "esbuild"   # modern bundler, smaller zip
+
+# API proxy → function
+[[redirects]]
+  from = "/api/chat"
+  to   = "/.netlify/functions/chat"
+  status = 200
