@@ -63,7 +63,9 @@ const examples = [
     title: 'API Docs',
     category: 'Technical Writing',
     year: 2025,
-    excerpt: 'The Technical Docs is under NDA, however I have created an explanation of how I write technical documentation over on my {<a href="https://github.com/alistairgray/synthetic-documentation">GitHub</a>}',
+    excerpt: 'The Technical Docs is under NDA, however I have created an explanation of how I write technical documentation on my GitHub.',
+    url: 'https://github.com/alistairgray/synthetic-documentation',
+    external: true,
   },
   {
     title: 'Easily handle contingencies with Command Sequences',
@@ -201,7 +203,7 @@ const externalNav = [
     external: true,
   },
   {
-    href: 'mailto:alistair.gray@hey.com',
+    href: 'mailto:alistairggray@proton.me',
     label: 'Email',
     external: false,
   }
@@ -218,7 +220,6 @@ const currentYear = new Date().getFullYear();
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<meta charset="utf-8" />
 		<link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;600&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@600&display=swap" rel="stylesheet" />
 		<title>Alistair Gray - Technical Writer</title>
@@ -240,13 +241,11 @@ const currentYear = new Date().getFullYear();
                 </ul>
 
                 <ul class="nav-actions">
-                    {externalNav.map(({ href, label, download }) => (
+                    {externalNav.map(({ href, label, external }) => (
                         <li key={label}>
                             <a
                                 href={href}
-                                {...(download ? { download } : {})}
-                                target="_blank"
-                                rel="noopener noreferrer"
+                                {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                             >
                                 {label}
                             </a>
@@ -442,7 +441,7 @@ const currentYear = new Date().getFullYear();
             <h2>Contact</h2>
             <ul class="contact-list" aria-label="Contact links">
                 <li>
-                    <a href="mailto:alistair.g.gray@gmail.com">Email</a>
+                    <a href="mailto:alistairggray@proton.me">Email</a>
                 </li>
                 <li>
                     <a
