@@ -7,7 +7,7 @@ const ChatWidget = () => {
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: 'Hi, I’m Alistair‑Bot. Ask me anything about Alistair Gray’s experience.',
+      content: 'Hi, I’m Alistair‑Bot. Ask me anything about my experience.',
     },
   ]);
 
